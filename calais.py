@@ -21,12 +21,12 @@ class AppURLopener(urllib.FancyURLopener):
     version = "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.0.5) Gecko/2008121623 Ubuntu/8.10 (intrepid)Firefox/3.0.5" # Lie shamelessly to Wikipedia.
 urllib._urlopener = AppURLopener()
 
-class Calais():
+class Calais(object):
     """
     Python class that knows how to talk to the OpenCalais API.  Use the analyze() and analyze_url() methods, which return CalaisResponse objects.  
     """
     api_key = None
-    processing_directives = {"contentType":"TEXT/RAW", "outputFormat":"application/json", "reltagBaseURL":None, "calculateRelevanceScore":"true", "enableMetadataType":None, "discardMetadata":None, "omitOutputtingOriginalText":"true"}
+    processing_directives = {"contentType":"TEXT/RAW", "outputFormat":"application/json", "reltagBaseURL":None, "calculateRelevanceScore":"true", "enableMetadataType":"SocialTags", "discardMetadata":None, "omitOutputtingOriginalText":"true"}
     user_directives = {"allowDistribution":"false", "allowSearch":"false", "externalID":None}
     external_metadata = {}
 
@@ -106,7 +106,7 @@ class Calais():
             raise ValueError("Only plaintext and HTML files are currently supported.  ")
         return self.analyze(content, content_type=content_type, external_id=fn)
 
-class CalaisResponse():
+class CalaisResponse(object):
     """
     Encapsulates a parsed Calais response and provides easy pythonic access to the data.
     """
